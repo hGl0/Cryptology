@@ -22,17 +22,21 @@ def gcd(y,x):
 # prints and returns all possible keys
 def hack_affine(match1, match2):
     # brute force approach
-    p1, c1 = match1
-    p2, c2 = match2
-    keys = []
-    for a in range(26):
-        if gcd(a, 26) != 1:
-            continue
-        for b in range(26):
-            if (a*p1 + b) % 26 == c1 and (a*p2 + b)%26 == c2:
-                print('possible key: ('+str(a)+','+str(b)+')')
-                keys.append((a,b))
-    return keys
+    x1, y1 = match1
+    x2, y2 = match2
+    inv = modular_inverse((x2-x1))
+    a = (y2-y1)*inv
+    b = (y1-a*x1) % 26
+    return (a,b)
+
+    # for a in range(26):
+    #     if gcd(a, 26) != 1:
+    #         continue
+    #     for b in range(26):
+    #         if (a*x1 + b) % 26 == y1 and (a*x2 + b)%26 == y2:
+    #             print('possible key: ('+str(a)+','+str(b)+')')
+    #             keys.append((a,b))
+    # return keys
 
 # calculates modular inverse of interger a in group Z_n
 def modular_inverse(a, n = 26):
@@ -68,3 +72,46 @@ def decode_num(text):
     for n in text:
         decoded += list(encoding.keys())[n]
     return decoded
+
+
+def dec_perm(key, cipher):
+    decrypted = cipher
+    for c in key:
+        decrypted = decrypted.replace(key[c], c.upper())
+    return decrypted
+
+def enc_perm(key, plain):
+    encrypted = plain
+    for c in key:
+        encrypted = encrypted.replace(c, key[c])
+    return encrypted
+
+def frequ_pair(text):
+    frq = {}
+    for i in range(len(text)-1):
+            pair = text[i]+text[i+1]
+            if pair in frq:
+                frq[pair] += 1
+            else:
+                frq[pair] = 1
+    return frq
+
+def frequ_triple(text):
+    frq = {}
+    for i in range(len(text)-2):
+        triple = text[i] + text[i+1] + text[i+2]
+        if triple in frq:
+            frq[triple] +=1
+        else:
+            frq[triple] = 1
+    return frq
+
+def double_letters(text):
+    doubles = {}
+    for i in range(len(text)-1):
+        if text[i] != text[i+1]: continue
+        pair = text[i]+text[i+1]
+        if pair in doubles:
+            doubles[pair] += 1
+        else: doubles[pair] = 1
+    return doubles
