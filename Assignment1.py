@@ -1,6 +1,23 @@
 from collections import Counter
 def decrypt_ceasar(key, ciphertext):
-    pass
+    dec = ''
+    for c in ciphertext:
+        c_new = (c-key)%26
+        dec += str(c_new)
+    return dec
+
+def encrypt_ceasar(key, plaintext):
+    enc = []
+    for c in plaintext:
+        c_new = (c+key)%26
+        enc.append(c_new)
+    return enc
+
+def hack_ceasar(ciphertext):
+    for i in range(0, 27):
+        dec = decrypt_ceasar(i, ciphertext)
+        print('key: ', i)
+        print(decode_num(dec))
 
 # decrypts affine chiffre with key
 def decrypt_affine(key, ciphertext):
@@ -25,7 +42,7 @@ def hack_affine(match1, match2):
     x1, y1 = match1
     x2, y2 = match2
     inv = modular_inverse((x2-x1))
-    a = (y2-y1)*inv
+    a = (y2-y1)*inv % 26
     b = (y1-a*x1) % 26
     return (a,b)
 

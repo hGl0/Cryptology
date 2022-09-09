@@ -2,6 +2,7 @@ from Assignment1 import *
 
 if __name__ == '__main__':
     # affine chiffre
+    '''
     cipher1 = "KQEREJEBCPPCJCRKIEACUZBKRVPKRBCIBQCARBJCVFCUP" \
              "KRIOFKPACUZQEPBKRXPEIIEABDKPBCPFCDCCAFIEABDKP" \
              "BCPFEQPKAZBKRHAIBKAPCCIBURCCDKDCCJCIDFUIXPAFF" \
@@ -18,6 +19,7 @@ if __name__ == '__main__':
     print(key)
     decrypted1 = decode_num(decrypt_affine(key, encoded1))
     print(decrypted1)
+    
     '''
     # to continue later, maybe when language is known?
     # general substitution
@@ -38,13 +40,38 @@ if __name__ == '__main__':
     print(sorted(frq_tri_subs.items(), key=lambda x: x[1], reverse=True))
     doubles = double_letters(cipher2)
     print(sorted(doubles.items(), key=lambda x: x[1], reverse=True))
-    perm_eng = {'w':'f', 'e':'c', 't':'g', 'a':'s'}
-    perm_fr = {'w':'f', 'e':'c', 's':'g', 'a':'s', 'l': 'z'}
+    # same frequ: a, i, n
+    perm_eng = {'c':'o',
+                'e':'c',
+                'h': 'z',
+                'l':'n',
+                'o':'k',
+                't':'u',
+                'w':'f'}
+                #'t':'g', 'a':'s', 'o':'k', }
+    # , 'n':'i', 'i':'y'
     print()
     print(cipher2)
     print(dec_perm(perm_eng, cipher2))
-    print(dec_perm(perm_fr, cipher2))
     '''
+
+    # unkown cipher
+    # try first vigenere
+    cipher3 = "BNVSNSIHQCEELSSKKYERIFJKXUMBGYKAMQLJTYAVFBKVT" \
+              "DVBPVVRJYYLAOKYMPQSCGDLFSRLLPROYGESEBUUALRWXM" \
+              "MASAZLGLEDFJBZAVVPXWICGJXASCBYEHOSNMULKCEAHTQ" \
+              "OKMFLEBKFXLRRFDTZXCIWBJSICBGAWDVYDHAVFJXZIBKC" \
+              "GJIWEAHTTOEWTUHKRQVVRGZBXYIREMMASCSPBNLHJMBLR" \
+              "FFJELHWEYLWISTFVVYFJCMHYUYRUFSFMGESIGRLWALSWM" \
+              "NUHSIMYYITCCQPZSICEHBCCMZFEGVJYOCDEMMPGHVAAUM" \
+              "ELCMOEHVLTIPSUYILVGFLMVWDVYDBTHFRAYISYSGKVSUU" \
+              "HYHGGCKTMBLRX"
+    cipher3_num = encode_num(cipher3)
+    hack_ceasar(cipher3_num)
+    '''
+
+
+
 
 
 
